@@ -1,0 +1,44 @@
+@import "https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css";
+
+
+:root {
+--bg: #0f1115;
+--panel: #171a21;
+--muted: #8b95a7;
+--text: #e6e7eb;
+--accent: #2dd4bf;
+--danger: #ff1717;
+--success: #00aa3e;
+}
+
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; background: var(--bg); color: var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; }
+
+
+.app { display: grid; grid-template-columns: 320px 1fr; height: 100%; }
+.sidebar { background: var(--panel); border-right: 1px solid #222631; overflow: hidden; display: flex; flex-direction: column; }
+.sidebar .title { padding: 14px 16px; font-weight: 700; letter-spacing: .4px; border-bottom: 1px solid #222631; }
+.list { overflow: auto; }
+.item { padding: 12px 16px; border-bottom: 1px solid #1e2230; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; }
+.item:hover { background: #131722; }
+.item.active { outline: 2px solid var(--accent); background: #10141e; }
+.badge { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.badge.green { background: var(--success); }
+.badge.red { background: var(--danger); }
+.meta { font-size: 12px; color: var(--muted); }
+
+
+.map-container { position: relative; }
+.counter { position: absolute; right: 16px; bottom: 16px; background: var(--panel); border: 1px solid #222631; border-radius: 12px; padding: 10px 14px; font-weight: 700; }
+
+
+.popup { font-size: 12px; color: var(--bg);}
+
+
+/* Drone icon */
+.drone-wrapper { width: 28px; height: 28px; transform: translate(-50%, -50%); display: grid; place-items: center; }
+.drone-arrow { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 14px solid white; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.6)); }
+/* .drone-body { width: 8px; height: 8px; border-radius: 50%; margin-top: 2px; } */
+.drone-body { width: 35px; height: 35px; border-radius: 50%; margin-top: 2px; display: flex; justify-content: center;align-items: center; }
+.drone-icon { width: 65%; height: 65%;  align-self: center;}
