@@ -32,7 +32,7 @@ function GenerateData() {
      {
         "type": "Feature",
         "properties": {
-          "serial": makeID(2), //frome 10 -> 2
+          "serial": makeID(3), //frome 10 -> 2
           "registration": "SD-" +makeID(2), 
           "Name": "Dji Mavic",
           "altitude": Math.floor(Math.random() * 100),

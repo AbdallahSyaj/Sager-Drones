@@ -12,34 +12,35 @@ export default function DroneList() {
   const selected = useSelector(selectSelected);
   const dispatch = useDispatch();
 
-  const sorted = [...drones].sort((a, b) => b.lastTimestamp - a.lastTimestamp);
+  const sortedDrones = [...drones].sort((a, b) => b.lastTimestamp - a.lastTimestamp);
 
   return (
     <div className="sidebar">
       <div className="title">DRONE FLYING</div>
       <div className="list">
-        {sorted.map((d) => {
-          const active = selected === d.serial;
-          const allowed = isAllowed(d.registration);
+        {sortedDrones.map((drone) => {
+          const isActive = selected === drone.serial;
+          const isRegistrationAllowed = isAllowed(drone.registration);
 
           return (
             <div
-              key={d.serial}
-              className={`item ${active ? "active" : ""}`}
-              onClick={() => dispatch(selectDrone(d.serial))}
+              key={drone.serial}
+              className={`item ${isActive ? "active" : ""}`}
+              onClick={() => dispatch(selectDrone(drone.serial))}
             >
               <div>
-                <div style={{ fontWeight: 700 }}>
-                  {d.name}{" "}
-                  <span className={`badge ${allowed ? "green" : "red"}`} />
+                <div style={{ fontWeight: "bold" }}>
+                  {drone.name}{" "}
+                  <span
+                    className={`badge ${isRegistrationAllowed ? "green" : "red"}`}
+                  />
                 </div>
-                <div className="meta">Serial: {d.serial}</div>
-                <div className="meta">Registration: {d.registration}</div>
+                <div className="meta">Serial: {drone.serial}</div>
+                <div className="meta">Registration: {drone.registration}</div>
                 <div className="meta">
-                  Pilot: {d.pilot} • Org: {d.organization}
+                  Pilot: {drone.pilot} . Org: {drone.organization}
                 </div>
               </div>
-              <div className="meta">Alt {d.altitude}m</div>
             </div>
           );
         })}

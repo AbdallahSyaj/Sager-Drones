@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAGER Navbar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+
+  <nav class="bg-black px-4 py-2 flex items-center justify-between border-  b border-gray-800">
+    
+    <!-- Logo -->
+    <div class="flex items-center">
+      <img src="./src/assets/sager_log.svg" 
+           alt="Sager Logo" class="h-6">
+    </div>
+
+    <!-- Right side -->
+    <div class="flex items-center space-x-6">
+
+      <!-- Fullscreen Icon -->
+      <button class="hover:text-gray-400">
+         <img src="./src/assets/capture-svgrepo-com.svg" alt="" srcset="" class="nav-icon">
+      </button>
+
+      <!-- Language Icon -->
+      <button class="hover:text-gray-400">
+         <img src="./src/assets/language-svgrepo-com.svg" alt="" srcset="" class="nav-icon">
+      </button>
+
+
+      <!-- Notifications -->
+      <div class="relative">
+        <button class="hover:text-gray-400">
+         <img src="./src/assets/bell.svg" alt="" srcset="" class="nav-icon">
+        </button>
+        <span class="absolute -top-1 -right-1 bg-red-600 text-xs rounded-full px-1.5">8</span>
+      </div>
+
+      <!-- User Info -->
+      <div class="text-right">
+        <p class="text-sl">Hello, <span class="font-semibold">Mohammed Omar</span></p>
+        <p class="text-xm text-gray-400">Technical Support</p>
+      </div>
+
+    </div>
+  </nav>
+<style>
+  .nav-icon {
+    width: 25px;
+    height: 25px;
+  }
+</style>
+</body>
+</html>
