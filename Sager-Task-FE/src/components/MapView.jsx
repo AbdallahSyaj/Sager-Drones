@@ -14,7 +14,7 @@ const lineLayer = {
     'line-width': 2,
     'line-color': [
       'case',
-      ['boolean', ['feature-state', 'allowed'], false],
+       ['boolean', ['get', 'allowed'], false],
       '#22c55e',
       '#ef4444'
     ]

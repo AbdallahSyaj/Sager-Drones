@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectDrone,
@@ -6,17 +6,50 @@ import {
   selectAllDrones,
 } from "../store/dronesSlice";
 import { isAllowed } from "../utils/formatters";
+import droneImg from '../assets/drone.svg';
 
 export default function DroneList() {
   const drones = useSelector(selectAllDrones);
   const selected = useSelector(selectSelected);
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(true);
 
-  const sortedDrones = [...drones].sort((a, b) => b.lastTimestamp - a.lastTimestamp);
+  const sortedDrones = [...drones].sort(
+    (a, b) => b.lastTimestamp - a.lastTimestamp
+  );
+
+  const toggleList = () => {
+    setIsOpen(!isOpen);
+  };
+
+  if (!isOpen) {
+    return (
+      <div className="sidebar collapsed">
+        <div className="drone-icon-circle" onClick={toggleList}>
+          <img src={droneImg} alt="Drone List" className="DroneListIcon"/>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="sidebar">
-      <div className="title">DRONE FLYING</div>
+      <div className="DroneListHead">
+        <div className="DroneListTitle">
+          <div className="title">DRONE FLYING</div>
+          <button className="DroneListBtn" onClick={toggleList}>
+            X
+          </button>
+        </div>
+        <div className="DroneListOptions">
+          <a href="#" className="DronListOption DroneOption">
+            Drones
+          </a>
+          <a href="#" className="DronListOption HistoryOption">
+            Flights History
+          </a>
+        </div>
+      </div>
       <div className="list">
         {sortedDrones.map((drone) => {
           const isActive = selected === drone.serial;
@@ -28,18 +61,23 @@ export default function DroneList() {
               className={`item ${isActive ? "active" : ""}`}
               onClick={() => dispatch(selectDrone(drone.serial))}
             >
-              <div>
-                <div style={{ fontWeight: "bold" }}>
-                  {drone.name}{" "}
-                  <span
-                    className={`badge ${isRegistrationAllowed ? "green" : "red"}`}
-                  />
+              <div className="DroneListItems">
+                <div className="DroneListItemsName">
+                  <div>{drone.name} </div>
                 </div>
-                <div className="meta">Serial: {drone.serial}</div>
-                <div className="meta">Registration: {drone.registration}</div>
-                <div className="meta">
-                  Pilot: {drone.pilot} . Org: {drone.organization}
+
+                <div className="DroneListItemsDetails">
+                  <div className="meta">Serial # <br /> {drone.serial}</div>
+                  <div className="meta">Registration # <br /> {drone.registration}</div>
+                  <div className="meta">Pilot <br /> {drone.pilot}</div>
+                  <div className="meta">Organization  <br /> {drone.organization}</div>
                 </div>
+              </div>
+
+              <div className="DroneListItems">
+                <span
+                  className={`badge ${isRegistrationAllowed ? "green" : "red"}`}
+                />
               </div>
             </div>
           );

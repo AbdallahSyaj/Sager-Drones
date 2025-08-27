@@ -15,7 +15,7 @@ exports.connection = (io) => {
 
     setInterval(function () {
       socket.emit('message', GenerateData());
-    }, 1000); //from 1000 -> 5000
+    }, 5000); //from 1000 -> 5000
 
     socket.on("disconnect", () => {
       console.log(`-> Client ${socket.id} disconnected`);
@@ -39,6 +39,7 @@ function GenerateData() {
           "pilot": "Besher",
           "organization" : " Sager Drone",
           "yaw" : 120 + Math.floor(Math.random() * 20)
+          // "yaw": Math.floor(Math.random() * 360)
         },
         "geometry": {
           "coordinates": makeLocation(),
