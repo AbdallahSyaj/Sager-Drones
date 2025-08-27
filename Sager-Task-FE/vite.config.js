@@ -4,11 +4,13 @@ import tailwindcss from '@tailwindcss/vite'
 
 
 export default defineConfig({
-plugins: [react(),
+  plugins: [
+    react(),
     tailwindcss(),
-],
-server: {
-port: 5173,
-
-}
+  ],
+  server: {
+    port: 5173,
+  },
+ 
+  base: '/Sager-Drones/'
 })
