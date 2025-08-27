@@ -1,17 +1,22 @@
 {
   "name": "sager-task-fe",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
+  "vite": {
+    "base": "/Sager-Drones/"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "preview": "vite preview",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
     "@tailwindplus/elements": "^1.0.9",
+    "gh-pages": "^6.3.0",
     "jspdf": "^3.0.2",
     "lucide-react": "^0.542.0",
     "mapbox-gl": "^3.14.0",
