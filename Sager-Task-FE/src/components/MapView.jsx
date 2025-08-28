@@ -26,7 +26,7 @@ export default function MapView() {
   const dispatch = useDispatch()
   const drones = useSelector(selectAllDrones)
 
-  // الآن الاختيار مبني على الـ registration كنت عامل قبل على ال serial 
+
   const selectedRegistration = useSelector(selectSelected)
   const [hovered, setHovered] = useState(null)
 
@@ -50,7 +50,8 @@ export default function MapView() {
     }),
     [drones]
   )
-// ركزت على الـ registration بدل الـ serial في الاختيار
+
+
   useEffect(() => {
     if (!selectedRegistration) return
     const d = drones.find((x) => x.registration === selectedRegistration)
@@ -66,6 +67,8 @@ export default function MapView() {
         mapboxAccessToken={MAPBOX_TOKEN}
         initialViewState={{ longitude: 35.93, latitude: 31.95, zoom: 12 }}
         mapStyle="mapbox://styles/mapbox/dark-v11"
+
+        onClick={() => dispatch(selectDrone(null))} //to deselect on map click
       >
         <Source id="paths" type="geojson" data={pathsGeoJSON}>
           <Layer {...lineLayer} />
@@ -73,7 +76,7 @@ export default function MapView() {
 
         {drones.map((d) => (
           <Marker
-            key={d.registration} 
+            key={d.registration}
             longitude={d.coord[0]}
             latitude={d.coord[1]}
             anchor="center"
