@@ -17,7 +17,7 @@ export default function DroneList() {
   const sortedDrones = [...drones].sort(
     (a, b) => b.lastTimestamp - a.lastTimestamp
   );
-
+// we toggle the list view
   const toggleList = () => {
     setIsOpen(!isOpen);
   };
@@ -31,7 +31,7 @@ export default function DroneList() {
       </div>
     );
   }
-
+// we show the list view
   return (
     <div className="sidebar">
       <div className="DroneListHead">

@@ -14,7 +14,7 @@ const lineLayer = {
     'line-width': 2,
     'line-color': [
       'case',
-       ['boolean', ['get', 'allowed'], false],
+      ['boolean', ['get', 'allowed'], false],
       '#22c55e',
       '#ef4444'
     ]
@@ -25,7 +25,9 @@ export default function MapView() {
   const mapRef = useRef(null)
   const dispatch = useDispatch()
   const drones = useSelector(selectAllDrones)
-  const selectedSerial = useSelector(selectSelected)
+
+  // الآن الاختيار مبني على الـ registration كنت عامل قبل على ال serial 
+  const selectedRegistration = useSelector(selectSelected)
   const [hovered, setHovered] = useState(null)
 
   useEffect(() => {
@@ -42,20 +44,20 @@ export default function MapView() {
       type: 'FeatureCollection',
       features: drones.map((d) => ({
         type: 'Feature',
-        properties: { serial: d.serial, allowed: isAllowed(d.registration) },
+        properties: { registration: d.registration, allowed: isAllowed(d.registration) },
         geometry: { type: 'LineString', coordinates: d.path }
       }))
     }),
     [drones]
   )
-
+// ركزت على الـ registration بدل الـ serial في الاختيار
   useEffect(() => {
-    if (!selectedSerial) return
-    const d = drones.find((x) => x.serial === selectedSerial)
+    if (!selectedRegistration) return
+    const d = drones.find((x) => x.registration === selectedRegistration)
     if (d && mapRef.current) {
       mapRef.current.flyTo({ center: d.coord, zoom: 14, duration: 1000 })
     }
-  }, [selectedSerial, drones])
+  }, [selectedRegistration, drones])
 
   return (
     <div className="map-container" style={{ height: '100%' }}>
@@ -64,7 +66,6 @@ export default function MapView() {
         mapboxAccessToken={MAPBOX_TOKEN}
         initialViewState={{ longitude: 35.93, latitude: 31.95, zoom: 12 }}
         mapStyle="mapbox://styles/mapbox/dark-v11"
-        
       >
         <Source id="paths" type="geojson" data={pathsGeoJSON}>
           <Layer {...lineLayer} />
@@ -72,13 +73,13 @@ export default function MapView() {
 
         {drones.map((d) => (
           <Marker
-            key={d.serial}
+            key={d.registration} 
             longitude={d.coord[0]}
             latitude={d.coord[1]}
             anchor="center"
             onClick={(e) => {
               e.originalEvent.stopPropagation()
-              dispatch(selectDrone(d.serial))
+              dispatch(selectDrone(d.registration))
             }}
           >
             <div
